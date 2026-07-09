@@ -12,7 +12,6 @@
     <artifactId>rpc-spring-boot-starter</artifactId>
     <name>rpc-spring-boot-starter</name>
     <description>Spring Boot 自动装配入口</description>
-
     <dependencies>
         <dependency>
             <groupId>com.ly.ttd</groupId>

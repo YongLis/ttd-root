@@ -93,7 +93,6 @@ public class NacosRpcAutoConfiguration {
             NacosRpcServicePostProcessor servicePostProcessor, ObjectMapper objectMapper) {
         return new NacosRpcServerBootstrap(properties, servicePostProcessor, objectMapper);
     }
-
     @Bean
     @ConditionalOnMissingBean
     public NacosRpcLifecycle nacosRpcLifecycle(

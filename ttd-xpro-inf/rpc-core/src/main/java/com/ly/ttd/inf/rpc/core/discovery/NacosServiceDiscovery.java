@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public class NacosServiceDiscovery implements ServiceDiscovery {
-
     private final NamingService namingService;
     private final NacosRpcProperties properties;
 

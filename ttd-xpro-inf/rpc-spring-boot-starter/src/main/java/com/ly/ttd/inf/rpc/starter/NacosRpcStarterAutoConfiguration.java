@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Import;
  * <pre>
  * nacos.rpc.enabled=false
  * </pre>
+ *
  */
 @AutoConfiguration
 @Import(NacosRpcAutoConfiguration.class)

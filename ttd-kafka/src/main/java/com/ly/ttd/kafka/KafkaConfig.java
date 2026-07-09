@@ -53,7 +53,6 @@ public class KafkaConfig {
         if (bootstrapServers == null || bootstrapServers.isEmpty()) {
             throw new IllegalStateException("spring.kafka.bootstrap.servers is missing");
         }
-
         Properties properties = EnvPropertyUtil.collect(env, PRODUCER_PREFIX);
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         properties.putIfAbsent(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,

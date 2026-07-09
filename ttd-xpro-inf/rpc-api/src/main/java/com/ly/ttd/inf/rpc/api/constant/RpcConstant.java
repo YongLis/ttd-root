@@ -19,7 +19,6 @@ public interface RpcConstant {
 
     /** 元数据 Key：应用版本 */
     String META_APP_VERSION = "app.version";
-
     /** 元数据 Key：环境标识 */
     String META_ENV = "env";
 

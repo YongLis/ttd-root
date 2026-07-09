@@ -30,7 +30,6 @@ import java.util.*;
 public class NacosConfigLoader implements EnvironmentPostProcessor {
 
     private static final Logger log = LoggerFactory.getLogger(NacosConfigLoader.class);
-
     private static final String PREFIX = "ttd.nacos";
     private static final String DEFAULT_SERVER_ADDR = "127.0.0.1:8848";
     private static final String DEFAULT_GROUP = "DEFAULT_GROUP";

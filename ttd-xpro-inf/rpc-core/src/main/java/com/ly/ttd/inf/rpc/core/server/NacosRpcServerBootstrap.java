@@ -15,7 +15,6 @@ import java.util.Map;
  */
 @Slf4j
 public class NacosRpcServerBootstrap {
-
     private final NacosRpcProperties properties;
     private final NacosRpcServicePostProcessor servicePostProcessor;
     private final ObjectMapper objectMapper;

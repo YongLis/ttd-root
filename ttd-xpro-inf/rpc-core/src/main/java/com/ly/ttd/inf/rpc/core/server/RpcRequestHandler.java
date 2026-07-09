@@ -19,7 +19,6 @@ import java.util.Map;
  */
 @Slf4j
 public class RpcRequestHandler implements HttpHandler {
-
     private final Map<String, Object> exportedServices;
     private final ObjectMapper objectMapper;
 

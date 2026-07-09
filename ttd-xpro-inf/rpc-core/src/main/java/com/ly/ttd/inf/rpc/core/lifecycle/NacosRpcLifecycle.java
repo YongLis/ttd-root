@@ -29,7 +29,6 @@ public class NacosRpcLifecycle implements SmartLifecycle {
 
     private volatile boolean running = false;
     private int actualPort;
-
     public NacosRpcLifecycle(NacosRpcProperties properties,
                              NacosServiceRegistry registry,
                              NacosRpcServerBootstrap serverBootstrap,

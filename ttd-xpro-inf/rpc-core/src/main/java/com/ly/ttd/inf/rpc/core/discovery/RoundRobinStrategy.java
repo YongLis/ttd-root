@@ -11,7 +11,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 class RoundRobinStrategy implements LoadBalancerStrategy {
 
     private final AtomicInteger index = new AtomicInteger(0);
-
     @Override
     public Instance select(List<Instance> instances) {
         if (instances == null || instances.isEmpty()) {

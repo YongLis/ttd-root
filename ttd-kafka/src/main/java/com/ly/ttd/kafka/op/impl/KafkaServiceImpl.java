@@ -44,7 +44,6 @@ public class KafkaServiceImpl implements KafkaService {
             }
         }
     }
-
     @Override
     public void sendMessage(String topic, String key, String message) {
         try {

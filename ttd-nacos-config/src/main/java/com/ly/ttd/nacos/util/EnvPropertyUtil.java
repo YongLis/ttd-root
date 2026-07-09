@@ -16,7 +16,6 @@ import java.util.Properties;
  * @since 2026/6/30
  */
 public final class EnvPropertyUtil {
-
     private EnvPropertyUtil() {
     }
 

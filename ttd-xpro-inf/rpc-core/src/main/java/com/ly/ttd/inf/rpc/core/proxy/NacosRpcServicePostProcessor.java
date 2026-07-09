@@ -31,7 +31,6 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 public class NacosRpcServicePostProcessor implements BeanPostProcessor, BeanFactoryAware {
-
     private final NacosServiceDiscovery discovery;
     private final NacosRpcProperties properties;
     private final LoadBalancerStrategy loadBalancer;

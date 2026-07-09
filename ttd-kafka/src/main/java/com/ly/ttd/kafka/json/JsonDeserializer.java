@@ -11,7 +11,6 @@ import java.io.IOException;
  */
 public class JsonDeserializer<T> implements Deserializer<T> {
     private Class<T> targetClass;
-
     @Override
     public T deserialize(String s, byte[] bytes) {
         if (null == bytes) {

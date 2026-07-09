@@ -78,7 +78,6 @@ public class RedisConfig {
         log.info("redis connection factory init success, mode={}, host={}:{}/{}", serverMode, host, port, database);
         return factory;
     }
-
     @Bean("TtdRedisTemplate")
     @DependsOn("nacosRedisConnectionFactory")
     public RedisTemplate<String, Object> initRedisTemplate(@Qualifier("nacosRedisConnectionFactory") RedisConnectionFactory connectionFactory) {

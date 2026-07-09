@@ -25,7 +25,6 @@ public class KryoDeserializer<T> implements Deserializer<T> {
         Kryo kryo = kryos.get();
         return (T) kryo.readClassAndObject(new Input(bytes));
     }
-
     @Override
     public void close() {
         kryos.remove();

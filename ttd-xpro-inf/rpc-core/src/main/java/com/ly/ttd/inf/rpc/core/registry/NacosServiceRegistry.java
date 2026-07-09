@@ -17,7 +17,6 @@ import java.util.Map;
  */
 @Slf4j
 public class NacosServiceRegistry implements ServiceRegistry {
-
     private final NamingService namingService;
     private final NacosRpcProperties properties;
 

@@ -23,7 +23,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Rpcwired {
-
     /**
      * 目标服务名称。为空时优先从被注入接口的 {@code @RpcService}
      * 注解读取，否则必须显式指定。

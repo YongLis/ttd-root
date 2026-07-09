@@ -17,7 +17,6 @@ public class RpcResponse {
 
     /** 请求 ID（关联请求） */
     private String requestId;
-
     /** 是否成功 */
     private boolean success;
 

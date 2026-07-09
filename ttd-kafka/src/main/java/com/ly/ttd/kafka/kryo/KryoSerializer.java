@@ -22,7 +22,6 @@ public class KryoSerializer<T> implements Serializer<T> {
     public void configure(Map<String, ?> configs, boolean isKey) {
         Serializer.super.configure(configs, isKey);
     }
-
     @Override
     public byte[] serialize(String s, T t) {
         if (null == t) {

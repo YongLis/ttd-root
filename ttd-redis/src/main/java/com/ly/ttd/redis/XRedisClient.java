@@ -12,7 +12,6 @@ public interface XRedisClient {
      * 存在
      */
     boolean exist(String key);
-
     /**
      * @param key           键
      * @param value         值

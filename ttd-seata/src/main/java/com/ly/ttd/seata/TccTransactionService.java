@@ -8,7 +8,6 @@ package com.ly.ttd.seata;
 public interface TccTransactionService {
 
     // 尝试提交
-
     boolean tryCommit(TransactionContext txc);
 
     // 确认提交

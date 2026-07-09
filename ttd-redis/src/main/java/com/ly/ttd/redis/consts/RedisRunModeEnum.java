@@ -8,7 +8,6 @@ public enum RedisRunModeEnum {
     SINGLE("single", "单点模式"),
     SENTINEL("sentinel", "哨兵模式"),
     CLUSTER("cluster", "集群模式");
-
     private String mode;
     private String desc;
 

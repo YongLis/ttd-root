@@ -11,7 +11,6 @@ import java.util.Properties;
  */
 @Slf4j
 public class AppUtils {
-
     private static String APP_NAME;
     private static String APP_VERSION;
 

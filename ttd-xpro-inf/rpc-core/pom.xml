@@ -19,7 +19,6 @@
             <groupId>com.ly.ttd</groupId>
             <artifactId>rpc-api</artifactId>
         </dependency>
-
         <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

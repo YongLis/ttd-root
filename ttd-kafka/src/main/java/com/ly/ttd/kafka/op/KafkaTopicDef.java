@@ -8,6 +8,7 @@ import lombok.Data;
  */
 @Data
 public class KafkaTopicDef {
+
     private int partitionNum = 1;
     private short replicaNum = 1;
     private String topicName;

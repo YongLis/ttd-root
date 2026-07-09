@@ -12,5 +12,4 @@ public class TransactionContext {
 
     private String xid;
     private String branchId;
-
 }

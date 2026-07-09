@@ -12,6 +12,7 @@ import java.lang.annotation.Target;
  * 会被注册到 Nacos 注册中心，供其他微服务远程调用。
  * <p>
  * 使用方式：
+ *
  * <pre>
  *  @RpcService(serviceName = "biz-pay-rcs-dem-srv")
  * public interface FactorAuditService {

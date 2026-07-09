@@ -24,7 +24,6 @@ import java.util.UUID;
  */
 @Slf4j
 public class RpcInvocationHandler implements InvocationHandler {
-
     private final String serviceName;
     private final String version;
     private final long timeout;

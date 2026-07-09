@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class XRedisClientImpl implements XRedisClient {
-
     @Resource
     @Qualifier("TtdRedisTemplate")
     private RedisTemplate redisTemplate;

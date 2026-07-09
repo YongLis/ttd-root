@@ -11,7 +11,6 @@ import java.util.concurrent.ThreadLocalRandom;
  * 从可用实例列表中按策略选出一个目标节点。
  */
 public interface LoadBalancerStrategy {
-
     /**
      * 从实例列表中选择一个。
      *

@@ -15,7 +15,6 @@ public class JsonSerializer implements Serializer {
     public void configure(Map configs, boolean isKey) {
         Serializer.super.configure(configs, isKey);
     }
-
     @Override
     public byte[] serialize(String s, Object o) {
         if (null == o) {

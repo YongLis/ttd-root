@@ -9,7 +9,6 @@ import java.util.Map;
 
 /**
  * Nacos RPC 框架配置属性——对应 application.properties 中的 {@code nacos.rpc.*} 前缀。
- * <p>
  */
 @Data
 @ConfigurationProperties(prefix = "nacos.rpc")

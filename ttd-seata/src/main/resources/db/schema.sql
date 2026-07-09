@@ -9,4 +9,4 @@ CREATE TABLE `tcc_transaction_log`
     `update_time`  datetime,
     UNIQUE KEY `uk_tx_branch` (`global_tx_id`,`branch_id`)
 ) ENGINE = InnoDB  AUTO_INCREMENT = 1
-    COMMENT ='tcc事务日志表';;
+    COMMENT ='tcc事务日志表';

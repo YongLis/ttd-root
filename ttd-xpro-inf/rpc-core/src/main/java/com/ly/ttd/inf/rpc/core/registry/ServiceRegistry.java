@@ -9,7 +9,6 @@ import java.util.Map;
  * 供其他微服务发现和调用。
  */
 public interface ServiceRegistry {
-
     /**
      * 注册服务实例到 Nacos。
      *

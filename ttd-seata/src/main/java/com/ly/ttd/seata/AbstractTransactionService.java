@@ -15,5 +15,4 @@ public abstract class AbstractTransactionService implements TccTransactionServic
     public abstract String getRole();
 
 
-
 }

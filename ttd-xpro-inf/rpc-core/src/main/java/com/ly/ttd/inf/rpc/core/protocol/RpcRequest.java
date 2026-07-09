@@ -17,7 +17,6 @@ public class RpcRequest {
 
     /** 目标服务名称（对应 Nacos service name） */
     private String serviceName;
-
     /** 目标服务版本 */
     private String version;
 
