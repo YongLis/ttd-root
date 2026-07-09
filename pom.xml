@@ -22,6 +22,7 @@
         <module>ttd-monitor</module>
         <module>ttd-xpro-inf</module>
         <module>ttd-seata</module>
+        <module>ttd-base</module>
     </modules>
 
 
