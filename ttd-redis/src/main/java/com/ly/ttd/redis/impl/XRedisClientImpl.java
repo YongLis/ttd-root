@@ -1,6 +1,6 @@
 package com.ly.ttd.redis.impl;
 
-import com.ly.ttd.redis.XRedisTemplate;
+import com.ly.ttd.redis.XRedisClient;
 import jakarta.annotation.Resource;
 import org.redisson.api.RBloomFilter;
 import org.redisson.api.RedissonClient;
@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @since 2026/3/6 09:31
  */
 @Service
-public class XRedisTemplateImpl implements XRedisTemplate {
+public class XRedisClientImpl implements XRedisClient {
 
     @Resource
     @Qualifier("TtdRedisTemplate")
@@ -46,7 +46,7 @@ public class XRedisTemplateImpl implements XRedisTemplate {
 
     @Override
     public Boolean setNx(String key, String value, Long timeoutSecond) {
-        Boolean result = redisTemplate.opsForValue().setIfAbsent(key, value,timeoutSecond, TimeUnit.SECONDS);
+        Boolean result = redisTemplate.opsForValue().setIfAbsent(key, value, timeoutSecond, TimeUnit.SECONDS);
         return result;
     }
 
@@ -176,28 +176,28 @@ public class XRedisTemplateImpl implements XRedisTemplate {
     public boolean btryInit(String key, Long expectedInsertions, double falseProbability) {
         // 布隆过滤器初始化
         // 注意：需要Redis 4.0+版本支持布隆过滤器
-        RBloomFilter<String> bloomFilter =  redissonClient.getBloomFilter(key);
-       return bloomFilter.tryInit(expectedInsertions, falseProbability);
+        RBloomFilter<String> bloomFilter = redissonClient.getBloomFilter(key);
+        return bloomFilter.tryInit(expectedInsertions, falseProbability);
     }
 
     @Override
     public boolean badd(String key, String element) {
-        RBloomFilter<String> bloomFilter =  redissonClient.getBloomFilter(key);
+        RBloomFilter<String> bloomFilter = redissonClient.getBloomFilter(key);
         return bloomFilter.add(element);
     }
+
     @Override
     public Long badd(String key, Set<String> elements) {
-        RBloomFilter<String> bloomFilter =  redissonClient.getBloomFilter(key);
+        RBloomFilter<String> bloomFilter = redissonClient.getBloomFilter(key);
         return bloomFilter.add(elements);
     }
 
     @Override
     public boolean bexists(String key, String element) {
         // 检查键是否存在
-        RBloomFilter<String> bloomFilter =  redissonClient.getBloomFilter(key);
+        RBloomFilter<String> bloomFilter = redissonClient.getBloomFilter(key);
         return bloomFilter.contains(element);
     }
-
 
 
 }

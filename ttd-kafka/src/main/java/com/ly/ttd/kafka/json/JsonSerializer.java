@@ -1,9 +1,7 @@
 package com.ly.ttd.kafka.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.kafka.common.header.Headers;
 import org.apache.kafka.common.serialization.Serializer;
 
 import java.util.Map;
@@ -20,12 +18,12 @@ public class JsonSerializer implements Serializer {
 
     @Override
     public byte[] serialize(String s, Object o) {
-        if(null == o){
+        if (null == o) {
             return null;
         }
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-           return objectMapper.writeValueAsBytes(o);
+            return objectMapper.writeValueAsBytes(o);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

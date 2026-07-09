@@ -6,6 +6,10 @@ package com.ly.ttd.redis.consts;
  */
 public class RedisConsts {
     /**
+     * redis配置前缀
+     */
+    public static final String REDIS_PREFIX = "spring.redis.";
+    /**
      * redis运行模式
      */
     public static String SERVER_MODE = "spring.redis.server.mode";

@@ -1,6 +1,6 @@
 package com.ly.ttd.kafka.op.impl;
 
-import com.ly.ttd.kafka.op.KafkaAdminOpService;
+import com.ly.ttd.kafka.op.KafkaService;
 import com.ly.ttd.kafka.op.KafkaTopicDef;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -8,11 +8,11 @@ import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.ListTopicsOptions;
 import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.apache.kafka.clients.admin.NewTopic;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
-import java.util.concurrent.ExecutionException;
 
 /**
  * @author yong.li
@@ -20,9 +20,11 @@ import java.util.concurrent.ExecutionException;
  */
 @Service
 @Slf4j
-public class KafkaAdminOpServiceImpl implements KafkaAdminOpService {
+public class KafkaServiceImpl implements KafkaService {
     @Resource
     private AdminClient adminClient;
+    @Resource
+    private KafkaProducer producer;
 
 
     @Override
@@ -41,6 +43,19 @@ public class KafkaAdminOpServiceImpl implements KafkaAdminOpService {
                 log.error("create topic {} failed", topicDef.getTopicName(), e);
             }
         }
+    }
+
+    @Override
+    public void sendMessage(String topic, String key, String message) {
+        try {
+            ProducerRecord record = new ProducerRecord(topic, key, message);
+            producer.send(record);
+        }catch (Exception e){
+            log.error("send kafka message error, topic={}, message={}", topic, message);
+        }
+
+
+
     }
 
 }

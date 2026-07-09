@@ -7,11 +7,11 @@ import java.util.Set;
  * @author yong.li
  * @since 2026/3/5 15:18
  */
-public interface XRedisTemplate {
+public interface XRedisClient {
     /**
-     *存在
+     * 存在
      */
-    public boolean exist(String key);
+    boolean exist(String key);
 
     /**
      * @param key           键
@@ -74,7 +74,9 @@ public interface XRedisTemplate {
      * 将一个插入到列表头部
      */
     void lpush(String key, Object value);
+
     void lpush(String key, List<String> values);
+
     /**
      * 设置过期时间
      */
@@ -92,7 +94,7 @@ public interface XRedisTemplate {
      * count < 0 : 从表尾开始向表头搜索，移除与 VALUE 相等的元素，数量为 COUNT 的绝对值。
      * count = 0 : 移除表中所有与 VALUE 相等的值。
      */
-     void lrem(String key, Long count, String value);
+    void lrem(String key, Long count, String value);
 
     /**
      * 通过索引设置列表元素的值
@@ -102,12 +104,13 @@ public interface XRedisTemplate {
     /**
      * 移除列表的最后一个元素，返回值为移除的元素。
      */
-     Object rpop(String key);
+    Object rpop(String key);
 
     /**
      * 在列表中添加一个或多个值到列表尾部
      */
     void rpush(String key, Object value);
+
     void rpush(String key, List<Object> values);
 
 
@@ -121,6 +124,7 @@ public interface XRedisTemplate {
      * 布隆过滤器添加数据
      */
     boolean badd(String key, String element);
+
     Long badd(String key, Set<String> element);
 
     /**

@@ -9,7 +9,6 @@
 
     <artifactId>ttd-dynamic-tp</artifactId>
     <packaging>jar</packaging>
-
     <name>ttd-dynamic-tp</name>
     <url>http://maven.apache.org</url>
 
@@ -36,6 +35,11 @@
             <version>${springboot.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.dromara.dynamictp</groupId>
+            <artifactId>dynamic-tp-spring-boot-starter-common</artifactId>
+            <scope>compile</scope>
+        </dependency>
 
         <dependency>
             <groupId>com.ly.ttd</groupId>

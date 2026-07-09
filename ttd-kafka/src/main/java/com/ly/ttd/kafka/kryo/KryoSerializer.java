@@ -25,8 +25,8 @@ public class KryoSerializer<T> implements Serializer<T> {
 
     @Override
     public byte[] serialize(String s, T t) {
-        if(null == t){
-             return null;
+        if (null == t) {
+            return null;
         }
         Kryo kryo = kryos.get();
         Output output = new Output(2048, -1);
