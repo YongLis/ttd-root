@@ -1,18 +1,11 @@
 package com.ly.ttd.base.result;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-
-@Data
 public class Result<T> {
 
-    @Schema(description = "响应码", example = "0000")
     private String code;
 
-    @Schema(description = "响应信息", example = "success")
     private String message;
 
-    @Schema(description = "响应数据")
     private T data;
 
     public static <T> Result<T> success(T data) {
@@ -39,5 +32,29 @@ public class Result<T> {
         result.setCode(code);
         result.setMessage(message);
         return result;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 }

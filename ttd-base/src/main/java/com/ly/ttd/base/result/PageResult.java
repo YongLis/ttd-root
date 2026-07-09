@@ -1,7 +1,5 @@
 package com.ly.ttd.base.result;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
 
 import java.util.List;
 
@@ -9,25 +7,18 @@ import java.util.List;
  * @author yong.li
  * @since 2026/4/13 19:20
  */
-@Data
 public class PageResult<T> {
 
-    @Schema(description = "总记录数")
     private Long total;
 
-    @Schema(description = "当前页码")
     private Long current;
 
-    @Schema(description = "每页大小")
     private Long pageSize;
 
-    @Schema(description = "响应码", example = "0000")
     private String code;
 
-    @Schema(description = "响应信息", example = "success")
     private String message;
 
-    @Schema(description = "分页数据列表")
     private List<T> data;
 
     public static <T> PageResult<T> success(List<T> data) {
@@ -54,5 +45,53 @@ public class PageResult<T> {
         result.setCode(code);
         result.setMessage(message);
         return result;
+    }
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
+    }
+
+    public Long getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Long current) {
+        this.current = current;
+    }
+
+    public Long getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Long pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public List<T> getData() {
+        return data;
+    }
+
+    public void setData(List<T> data) {
+        this.data = data;
     }
 }
