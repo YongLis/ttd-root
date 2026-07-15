@@ -1,12 +1,14 @@
 package com.ly.ttd.nacos.config;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.nacos.client.config.NacosConfigService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.boot.env.EnvironmentPostProcessor;
-import org.springframework.core.Ordered;
+import org.springframework.boot.logging.DeferredLog;
+import org.springframework.context.ApplicationListener;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.Ordered;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.core.env.PropertiesPropertySource;
@@ -26,10 +28,12 @@ import java.util.*;
  * @author yong.li
  * @since 2026/6/30 16:05
  */
-@Order(Ordered.HIGHEST_PRECEDENCE + 20)
-public class NacosConfigLoader implements EnvironmentPostProcessor {
+@Order
+public class NacosConfigLoader implements EnvironmentPostProcessor, Ordered, ApplicationListener<ApplicationEnvironmentPreparedEvent> {
+    // 使用 DeferredLog 记录日志
+    private static final DeferredLog log = new DeferredLog();
 
-    private static final Logger log = LoggerFactory.getLogger(NacosConfigLoader.class);
+//    private static final Logger log = LoggerFactory.getLogger(NacosConfigLoader.class);
     private static final String PREFIX = "ttd.nacos";
     private static final String DEFAULT_SERVER_ADDR = "127.0.0.1:8848";
     private static final String DEFAULT_GROUP = "DEFAULT_GROUP";
@@ -37,6 +41,8 @@ public class NacosConfigLoader implements EnvironmentPostProcessor {
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
+
+        System.out.println("NacosConfigLoader starting — scanning for ttd.nacos config entries");
         log.info("NacosConfigLoader starting — scanning for ttd.nacos config entries");
 
         String serverAddr = environment.getProperty(PREFIX + ".server-addr", DEFAULT_SERVER_ADDR);
@@ -45,10 +51,11 @@ public class NacosConfigLoader implements EnvironmentPostProcessor {
         if (entries.isEmpty()) {
             log.info("NacosConfigLoader — no ttd.nacos[N].dataId entries found, skip remote config loading. "
                     + "Add ttd.nacos[0].namespace/group/dataId to application.properties.");
+
             return;
         }
 
-        log.info("NacosConfigLoader — server={}, {} config entries to load", serverAddr, entries.size());
+        System.out.println("NacosConfigLoader config read ready"+ JSON.toJSONString(entries));
 
         Map<String, NacosConfigService> configServiceCache = new LinkedHashMap<>();
         MutablePropertySources propertySources = environment.getPropertySources();
@@ -64,15 +71,18 @@ public class NacosConfigLoader implements EnvironmentPostProcessor {
                 }
 
                 String content = cs.getConfig(entry.dataId, entry.group, TIMEOUT_MS);
+
                 if (content == null || content.trim().isEmpty()) {
-                    log.info("Nacos config not found — namespace={}, group={}, dataId={}",
-                            entry.namespace, entry.group, entry.dataId);
+                    log.info(String.format("Nacos config not found — namespace=%s, group=%s, dataId=%s",
+                            entry.namespace, entry.group, entry.dataId));
+                    System.out.println(String.format("Nacos config not found — namespace=%s, group=%s, dataId=%s",
+                            entry.namespace, entry.group, entry.dataId));
                     continue;
                 }
 
                 Properties props = new Properties();
                 props.load(new StringReader(content));
-
+                System.out.println("load config from nacos, value="+JSON.toJSONString(props));
                 String sourceName = "nacos:" + entry.namespace + "/" + entry.group + "/" + entry.dataId;
                 if (propertySources.contains("systemEnvironment")) {
                     propertySources.addAfter("systemEnvironment", new PropertiesPropertySource(sourceName, props));
@@ -83,15 +93,15 @@ public class NacosConfigLoader implements EnvironmentPostProcessor {
                 }
 
                 loadedCount++;
-                log.info("Nacos config loaded — namespace={}, group={}, dataId={}, keys={}",
-                        entry.namespace, entry.group, entry.dataId, props.size());
             } catch (Exception e) {
-                log.warn("Failed to load Nacos config — namespace={}, group={}, dataId={}",
-                        entry.namespace, entry.group, entry.dataId, e);
+//                log.error("Failed to load Nacos config — namespace={}, group={}, dataId={}",
+//                        entry.namespace, entry.group, entry.dataId, e);
+                log.error(e);
+               e.printStackTrace();
             }
         }
 
-        log.info("NacosConfigLoader completed — loaded {}/{} configs", loadedCount, entries.size());
+        log.info("NacosConfigLoader completed");
     }
 
     private List<ConfigEntry> parseEntries(ConfigurableEnvironment environment) {
@@ -104,7 +114,7 @@ public class NacosConfigLoader implements EnvironmentPostProcessor {
             String namespace = environment.getProperty(PREFIX + "[" + i + "].namespace", "");
             String group = environment.getProperty(PREFIX + "[" + i + "].group", DEFAULT_GROUP);
             entries.add(new ConfigEntry(namespace, group, dataId.trim()));
-            log.info("Nacos config entry[{}] — namespace={}, group={}, dataId={}", i, namespace, group, dataId);
+            log.info(String.format("Nacos config entry[%d] — namespace=%s, group=%s, dataId=%s", i, namespace, group, dataId));
         }
         return entries;
     }
@@ -118,9 +128,24 @@ public class NacosConfigLoader implements EnvironmentPostProcessor {
             }
             return new NacosConfigService(nacosProps);
         } catch (Exception e) {
-            log.warn("Failed to create Nacos ConfigService — server={}, namespace={}", serverAddr, namespace, e);
+//            log.error("Failed to create Nacos ConfigService — server={}", serverAddr, e);
+            log.error(e);
             return null;
         }
+    }
+
+    @Override
+    public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
+        log.replayTo(NacosConfigLoader.class);
+    }
+
+    /**
+     * 必须在 ConfigDataEnvironmentPostProcessor (HIGHEST_PRECEDENCE + 10) 之后执行，
+     * 确保 application.properties 已加载到 Environment 中。
+     */
+    @Override
+    public int getOrder() {
+        return Ordered.HIGHEST_PRECEDENCE + 11;
     }
 
     private static class ConfigEntry {

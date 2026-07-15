@@ -1,6 +1,6 @@
 package com.ly.ttd.monitor.mid;
 
-import com.ly.ttd.inf.util.Md5Utils;
+import com.ly.ttd.utils.Md5Util;
 import org.springframework.stereotype.Component;
 
 import java.net.InetAddress;
@@ -21,7 +21,7 @@ public class ServerUniqueIdGenerator {
 //        NetworkInterface networkInterface = NetworkInterface.getByInetAddress(inetAddress);
         String hostName = inetAddress.getHostName();
         String ip = inetAddress.getHostAddress();
-        return Md5Utils.md5(serverName+""+ hostName+""+ip+(System.currentTimeMillis()));
+        return Md5Util.MD5(serverName+""+ hostName+""+ip+(System.currentTimeMillis()));
 
     }
 

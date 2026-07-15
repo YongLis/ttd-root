@@ -19,10 +19,13 @@
         <module>ttd-redis</module>
         <module>ttd-kafka</module>
         <module>ttd-nacos-config</module>
-        <module>ttd-monitor</module>
         <module>ttd-xpro-inf</module>
+        <module>ttd-monitor</module>
         <module>ttd-seata</module>
         <module>ttd-base</module>
+        <module>ttd-daf-starter</module>
+        <module>ttd-inf-daf</module>
+        <module>ttd-utils</module>
     </modules>
 
 

@@ -40,18 +40,7 @@
             <version>${nacos.version}</version>
             <scope>compile</scope>
         </dependency>
-        <!--        &lt;!&ndash; 使用纯净版时必须要引入同版本nacos-api和nacos-common，否则可能出现运行时找不到类的问题 &ndash;&gt;-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.alibaba.nacos</groupId>-->
-        <!--            <artifactId>nacos-common</artifactId>-->
-        <!--            <version>${nacos.version}</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.alibaba.nacos</groupId>-->
-        <!--            <artifactId>nacos-api</artifactId>-->
-        <!--            <version>${nacos.version}</version>-->
-        <!--        </dependency>-->
-        <!-- Source: https://mvnrepository.com/artifact/org.springframework/spring-context -->
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>

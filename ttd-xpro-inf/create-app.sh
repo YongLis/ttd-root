@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# 强制 UTF-8 编码，确保生成的文件中文不乱码
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # ============================================================================
 # ttd-xpro-inf 应用脚手架 (api + srv 双项目)
 #
